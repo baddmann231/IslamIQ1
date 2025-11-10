@@ -24,9 +24,12 @@ public $password;
         'email' => $this->email,
         'password' => $this->password
     ])){
-        return $this->redirect('/dashboard',navigate:true);
-    }
-    return $this->redirect('login',navigate:true);
+       $user = Auth::user();
+       if ($user->role === 'admin') {
+                return $this->redirect('/admin/dashboard', navigate: true);
+            } else {
+                return $this->redirect('/dashboard', navigate: true);
+            }
+        }
     }
 }
-

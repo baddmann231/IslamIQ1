@@ -4,10 +4,10 @@ namespace App\Livewire;
 
 use Livewire\Component;
 
-class Literacy extends Component
+class RukunIslam extends Component
 {
     public function render()
     {
-        return view('livewire.literacy');
+        return view('livewire.rukun-islam');
     }
 }

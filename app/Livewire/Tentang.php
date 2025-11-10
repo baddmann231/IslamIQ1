@@ -4,10 +4,10 @@ namespace App\Livewire;
 
 use Livewire\Component;
 
-class Quizz extends Component
+class Tentang extends Component
 {
     public function render()
     {
-        return view('livewire.quizz');
+        return view('livewire.tentang');
     }
 }

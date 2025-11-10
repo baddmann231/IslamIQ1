@@ -176,28 +176,28 @@ body[data-bs-theme="dark"] .dropdown-menu {
 
      <!-- End Dashboard Nav -->
 <li class="nav-item">
-  <a wire:navigate class="nav-link collapsed" href="/dashboard">
+  <a wire:navigate class="nav-link collapsed" href="/admin/dashboard">
     <i class="bi bi-speedometer2"></i>
     <span>Dashboard</span>
   </a>
 </li>
 
 <li class="nav-item">
-  <a wire:navigate class="nav-link collapsed" href="/daftar-kuis">
+  <a wire:navigate class="nav-link collapsed" href="/admin/daftar-kuis">
     <i class="bi bi-question-circle"></i>
     <span>Daftar Kuis</span>
   </a>
 </li>
 
 <li class="nav-item">
-  <a wire:navigate class="nav-link collapsed" href="/materi">
+  <a wire:navigate class="nav-link collapsed" href="/admin/materi">
     <i class="bi bi-journal-text"></i>
     <span>Materi</span>
   </a>
 </li>
 
 <li class="nav-item">
-  <a wire:navigate class="nav-link collapsed" href="/tentang">
+  <a wire:navigate class="nav-link collapsed" href="/admin/tentang">
     <i class="bi bi-info-circle"></i>
     <span>Tentang</span>
   </a>
