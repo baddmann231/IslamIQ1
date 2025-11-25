@@ -145,17 +145,24 @@ class User extends Authenticatable
     /**
      * Get user's progress stats untuk dashboard
      */
-    public function getQuizStats()
-    {
-        $attempts = $this->quizAttempts;
-        
-        return [
-            'total_attempts' => $attempts->count(),
-            'average_score' => $attempts->avg('score') ?? 0,
-            'highest_score' => $attempts->max('score') ?? 0,
-            'completed_quizzes' => $attempts->where('completed', true)->count(),
-        ];
-    }
+    // Di dalam class User, ganti method getQuizStats() dengan ini:
+
+/**
+ * Get user's progress stats untuk dashboard
+ */
+public function getQuizStats()
+{
+    $attempts = $this->quizAttempts()->whereNotNull('completed_at')->get();
+    
+    return [
+        'total_attempts' => $attempts->count(),
+        'average_score' => $attempts->avg('score') ?? 0,
+        'highest_score' => $attempts->max('score') ?? 0,
+        'completed_quizzes' => $attempts->count(),
+        'total_correct_answers' => $attempts->sum('correct_answers'),
+        'total_questions_answered' => $attempts->sum('total_questions'),
+    ];
+}
 
     /**
      * Update profile information

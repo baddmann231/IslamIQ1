@@ -1,65 +1,207 @@
-<div class="d-flex align-items-center justify-content-center" style="min-height: 80vh;">
-    <div class="container mt-5 pt-5">
-        <h2 class="text-center mb-4 fw-bold">📊 Statistik Umum IslamIQ</h2>
+<div>
+    <div class="pagetitle">
+        <h1>📊 Dashboard Admin</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
+                <li class="breadcrumb-item active">Dashboard</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
 
-        <div class="card shadow-sm p-4">
-            <canvas id="dummyChart" height="100"></canvas>
+    <section class="section dashboard">
+        <div class="row">
+            
+            <!-- Left side columns -->
+            <div class="col-lg-12">
+                <div class="row">
+                    
+                    <!-- Stats Cards -->
+                    <div class="col-xxl-3 col-md-6">
+                        <div class="card info-card sales-card">
+                            <div class="card-body">
+                                <h5 class="card-title">Total Pengguna</h5>
+                                <div class="d-flex align-items-center">
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                        <i class="bi bi-people"></i>
+                                    </div>
+                                    <div class="ps-3">
+                                        <h6>{{ $stats['total_users'] }}</h6>
+                                        <span class="text-success small pt-1 fw-bold">{{ $stats['active_users'] }}</span>
+                                        <span class="text-muted small pt-2 ps-1">aktif</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xxl-3 col-md-6">
+                        <div class="card info-card revenue-card">
+                            <div class="card-body">
+                                <h5 class="card-title">Total Kuis</h5>
+                                <div class="d-flex align-items-center">
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                        <i class="bi bi-journal-text"></i>
+                                    </div>
+                                    <div class="ps-3">
+                                        <h6>{{ $stats['total_quizzes'] }}</h6>
+                                        <span class="text-success small pt-1 fw-bold">{{ $stats['active_quizzes'] }}</span>
+                                        <span class="text-muted small pt-2 ps-1">aktif</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xxl-3 col-md-6">
+                        <div class="card info-card customers-card">
+                            <div class="card-body">
+                                <h5 class="card-title">Kuis Diselesaikan</h5>
+                                <div class="d-flex align-items-center">
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                        <i class="bi bi-check-circle"></i>
+                                    </div>
+                                    <div class="ps-3">
+                                        <h6>{{ $stats['completed_attempts'] }}</h6>
+                                        <span class="text-success small pt-1 fw-bold">{{ $stats['average_score'] }}%</span>
+                                        <span class="text-muted small pt-2 ps-1">rata-rata</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xxl-3 col-md-6">
+                        <div class="card info-card sales-card">
+                            <div class="card-body">
+                                <h5 class="card-title">Kuis Terpopuler</h5>
+                                <div class="d-flex align-items-center">
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                        <i class="bi bi-fire"></i>
+                                    </div>
+                                    <div class="ps-3">
+                                        <h6 class="truncate-text">{{ $stats['popular_quiz_name'] }}</h6>
+                                        <span class="text-success small pt-1 fw-bold">{{ $stats['popular_quiz_attempts'] }}</span>
+                                        <span class="text-muted small pt-2 ps-1">x dikerjakan</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Charts -->
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">📈 Performa Kuis</h5>
+                                <div id="performanceChart" style="min-height: 300px;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">👥 Aktivitas Pengguna</h5>
+                                <div id="activityChart" style="min-height: 300px;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div><!-- End Left side columns -->
+
         </div>
-    </div>
-</div>
+    </section>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    const ctx = document.getElementById('dummyChart').getContext('2d');
+    <!-- Vendor JS Files -->
+    <script src="/assets/vendor/apexcharts/apexcharts.min.js"></script>
 
-    const dummyChart = new Chart(ctx, {
-        type: 'bar', // tipe chart: bar, line, pie, dll.
-        data: {
-            labels: ['Pengguna Aktif', 'Total Kuis', 'Kuis Selesai', 'Nilai Rata-rata', 'Kuis Terpopuler'],
-            datasets: [{
-                label: 'Data Sementara',
-                data: [120, 15, 98, 82, 10],
-                backgroundColor: [
-                    'rgba(75, 192, 192, 0.6)',
-                    'rgba(255, 159, 64, 0.6)',
-                    'rgba(153, 102, 255, 0.6)',
-                    'rgba(255, 205, 86, 0.6)',
-                    'rgba(54, 162, 235, 0.6)'
-                ],
-                borderColor: [
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(255, 159, 64, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 205, 86, 1)',
-                    'rgba(54, 162, 235, 1)'
-                ],
-                borderWidth: 1,
-                borderRadius: 6
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    display: true,
-                    position: 'top'
-                },
-                title: {
-                    display: true,
-                    text: 'Data Dummy untuk Tampilan Dashboard'
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Performance Chart - Line Chart
+        var performanceOptions = {
+            series: [{
+                name: 'Rata-rata Skor',
+                data: {!! json_encode($chartData['performance']['scores']) !!}
+            }],
+            chart: {
+                height: 350,
+                type: 'line',
+                zoom: {
+                    enabled: false
                 }
             },
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    ticks: {
-                        precision: 0
+            dataLabels: {
+                enabled: false
+            },
+            stroke: {
+                curve: 'smooth',
+                width: 3
+            },
+            colors: ['#4154f1'],
+            grid: {
+                row: {
+                    colors: ['#f3f3f3', 'transparent'],
+                    opacity: 0.5
+                },
+            },
+            xaxis: {
+                categories: {!! json_encode($chartData['performance']['labels']) !!}
+            },
+            yaxis: {
+                min: 0,
+                max: 100,
+                labels: {
+                    formatter: function(value) {
+                        return value + '%';
                     }
                 }
             }
-        }
+        };
+
+        var performanceChart = new ApexCharts(document.querySelector("#performanceChart"), performanceOptions);
+        performanceChart.render();
+
+        // Activity Chart - Bar Chart
+        var activityOptions = {
+            series: [{
+                name: 'Attempt Kuis',
+                data: {!! json_encode($chartData['activity']['data']) !!}
+            }],
+            chart: {
+                type: 'bar',
+                height: 350
+            },
+            plotOptions: {
+                bar: {
+                    borderRadius: 4,
+                    horizontal: false,
+                }
+            },
+            dataLabels: {
+                enabled: false
+            },
+            colors: ['#2eca6a'],
+            xaxis: {
+                categories: {!! json_encode($chartData['activity']['labels']) !!}
+            }
+        };
+
+        var activityChart = new ApexCharts(document.querySelector("#activityChart"), activityOptions);
+        activityChart.render();
     });
-});
-</script>
+
+    // CSS untuk truncate text
+    const style = document.createElement('style');
+    style.textContent = `
+        .truncate-text {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 150px;
+        }
+    `;
+    document.head.appendChild(style);
+    </script>
+</div>

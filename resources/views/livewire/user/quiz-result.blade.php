@@ -111,10 +111,10 @@
 
                         <!-- Action Buttons -->
                         <div class="d-flex justify-content-center gap-3">
-                            <a href="{{ route('daftar-kuis') }}" class="btn btn-primary">
+                            <a href="{{ route('user.daftar-kuis') }}" class="btn btn-primary">
                                 <i class="fas fa-list"></i> Kuis Lainnya
                             </a>
-                            <a href="{{ route('dashboard') }}" class="btn btn-outline-secondary">
+                            <a href="{{ route('user.dashboard') }}" class="btn btn-outline-secondary">
                                 <i class="fas fa-home"></i> Dashboard
                             </a>
                         </div>
