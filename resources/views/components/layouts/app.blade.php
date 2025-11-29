@@ -110,22 +110,11 @@ body[data-bs-theme="dark"] .dropdown-menu {
                         <hr class="dropdown-divider">
                     </li>
 
-                    <li>
-                        <a class="dropdown-item d-flex align-items-center" href="{{ route('user.profile') }}#settings">
-                            <i class="bi bi-gear"></i>
-                            <span>Account Settings</span>
-                        </a>
-                    </li>
+                    
                     <li>
                         <hr class="dropdown-divider">
                     </li>
 
-                    <li>
-                        <a class="dropdown-item d-flex align-items-center" href="#">
-                            <i class="bi bi-question-circle"></i>
-                            <span>Need Help?</span>
-                        </a>
-                    </li>
                     <li>
                         <hr class="dropdown-divider">
                     </li>
@@ -163,18 +152,33 @@ body[data-bs-theme="dark"] .dropdown-menu {
 </li>
 
 <li class="nav-item">
+  <a wire:navigate class="nav-link collapsed" href="{{ route('user.add-friend') }}">
+    <i class="bi bi-question-circle"></i>
+    <span>Teman</span>
+  </a>
+</li>
+
+<li class="nav-item">
+  <a wire:navigate class="nav-link collapsed" href="{{ route('user.leaderboard') }}">
+    <i class="bi bi-question-circle"></i>
+    <span>Leaderboard</span>
+  </a>
+</li>
+
+<li class="nav-item">
+  <a wire:navigate class="nav-link collapsed" href="{{ route('user.learning-contents') }}">
+    <i class="bi bi-question-circle"></i>
+    <span>Materi</span>
+  </a>
+</li>
+
+<li class="nav-item">
   <a wire:navigate class="nav-link collapsed" href="/user/daftar-kuis">
     <i class="bi bi-question-circle"></i>
     <span>Daftar Kuis</span>
   </a>
 </li>
 
-<li class="nav-item">
-  <a wire:navigate class="nav-link collapsed" href="/user/materi">
-    <i class="bi bi-journal-text"></i>
-    <span>Materi</span>
-  </a>
-</li>
 
 <li class="nav-item">
   <a wire:navigate class="nav-link collapsed" href="/user/tentang">

@@ -18,6 +18,7 @@ class CreateQuiz extends Component
     public $quizDescription;
     public $quizDuration = 20;
     public $quizImage;
+    public $quizCategory = 'rukun_islam'; // ✅ DEFAULT CATEGORY
     
     public $questions = [
         [
@@ -56,22 +57,21 @@ class CreateQuiz extends Component
 
     public function setCorrectAnswer($questionIndex, $optionIndex)
     {
-        // Reset semua jawaban benar untuk soal ini
         foreach ($this->questions[$questionIndex]['options'] as $index => $option) {
             $this->questions[$questionIndex]['options'][$index]['is_correct'] = false;
         }
         
-        // Set jawaban yang dipilih sebagai benar
         $this->questions[$questionIndex]['options'][$optionIndex]['is_correct'] = true;
     }
 
     public function saveQuiz()
     {
-        // Validasi
+        // ✅ TAMBAHKAN VALIDASI UNTUK CATEGORY
         $this->validate([
             'quizTitle' => 'required|string|max:255',
             'quizDescription' => 'nullable|string',
             'quizDuration' => 'required|integer|min:1',
+            'quizCategory' => 'required|in:rukun_islam,rukun_iman,sejarah_islam',
             'quizImage' => 'nullable|image|max:2048',
             'questions.*.text' => 'required|string',
             'questions.*.image' => 'nullable|image|max:2048',
@@ -79,24 +79,22 @@ class CreateQuiz extends Component
             'questions.*.options.*.image' => 'nullable|image|max:2048',
         ]);
 
-        // Simpan gambar kuis
         $quizImagePath = null;
         if ($this->quizImage) {
             $quizImagePath = $this->quizImage->store('quiz-images', 'public');
         }
 
-        // Buat kuis
+        // ✅ TAMBAHKAN CATEGORY PADA CREATE QUIZ
         $quiz = Quiz::create([
             'title' => $this->quizTitle,
             'description' => $this->quizDescription,
             'duration' => $this->quizDuration,
+            'category' => $this->quizCategory,
             'image' => $quizImagePath,
             'question_count' => count($this->questions),
         ]);
 
-        // Simpan setiap soal
         foreach ($this->questions as $index => $questionData) {
-            // Simpan gambar soal
             $questionImagePath = null;
             if ($questionData['image']) {
                 $questionImagePath = $questionData['image']->store('question-images', 'public');
@@ -109,9 +107,7 @@ class CreateQuiz extends Component
                 'order' => $index + 1,
             ]);
 
-            // Simpan setiap pilihan jawaban
             foreach ($questionData['options'] as $optionData) {
-                // Simpan gambar pilihan
                 $optionImagePath = null;
                 if ($optionData['image']) {
                     $optionImagePath = $optionData['image']->store('option-images', 'public');

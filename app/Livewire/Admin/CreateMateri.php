@@ -5,10 +5,10 @@ use Livewire\Attributes\Layout;
 use Livewire\Component;
 
 #[Layout('components.layouts.admin')]
-class Materi extends Component
+class Tentang extends Component
 {
     public function render()
     {
-        return view('livewire.admin.materi');
+        return view('livewire.admin.create-materi');
     }
 }

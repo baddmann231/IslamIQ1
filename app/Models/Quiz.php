@@ -9,13 +9,21 @@ class Quiz extends Model
 {
     use HasFactory;
 
+    // ✅ TAMBAHKAN KONSTANTA KATEGORI
+    const CATEGORIES = [
+        'rukun_islam' => 'Rukun Islam',
+        'rukun_iman' => 'Rukun Iman', 
+        'sejarah_islam' => 'Sejarah Islam'
+    ];
+
     protected $fillable = [
         'title',
         'description',
         'image',
         'question_count',
         'duration',
-        'is_active'
+        'is_active',
+        'category' // ✅ TAMBAHKAN INI
     ];
 
     public function questions()
@@ -23,13 +31,11 @@ class Quiz extends Model
         return $this->hasMany(Question::class);
     }
 
-    // ✅ TAMBAHKAN RELASI INI
     public function quizAttempts()
     {
         return $this->hasMany(QuizAttempt::class);
     }
 
-    // ✅ TAMBAHKAN METHOD INI UNTUK DASHBOARD
     public function getCompletedAttemptsCountAttribute()
     {
         return $this->quizAttempts()->whereNotNull('completed_at')->count();
@@ -38,5 +44,11 @@ class Quiz extends Model
     public function getAverageScoreAttribute()
     {
         return $this->quizAttempts()->whereNotNull('completed_at')->avg('score') ?? 0;
+    }
+
+    // ✅ METHOD BARU UNTUK MENDAPATKAN LABEL KATEGORI
+    public function getCategoryLabelAttribute()
+    {
+        return self::CATEGORIES[$this->category] ?? 'Tidak Diketahui';
     }
 }

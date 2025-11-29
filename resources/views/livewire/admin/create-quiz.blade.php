@@ -1,5 +1,4 @@
 <!-- resources/views/livewire/admin/create-quiz.blade.php -->
-
 <div class="container py-5">
     <div class="row justify-content-center">
         <div class="col-md-10">
@@ -31,6 +30,17 @@
                                         <label for="quizDescription" class="form-label">Deskripsi</label>
                                         <textarea class="form-control" id="quizDescription" wire:model="quizDescription" rows="3"></textarea>
                                     </div>
+
+                                    <!-- ✅ TAMBAHKAN INPUT KATEGORI -->
+                                    <div class="mb-3">
+                                        <label for="quizCategory" class="form-label">Kategori *</label>
+                                        <select class="form-select" id="quizCategory" wire:model="quizCategory">
+                                            <option value="rukun_islam">Rukun Islam</option>
+                                            <option value="rukun_iman">Rukun Iman</option>
+                                            <option value="sejarah_islam">Sejarah Islam</option>
+                                        </select>
+                                        @error('quizCategory') <span class="text-danger">{{ $message }}</span> @enderror
+                                    </div>
                                 </div>
                                 
                                 <div class="col-md-4">
@@ -55,7 +65,7 @@
                             </div>
                         </div>
 
-                        <!-- Daftar Soal -->
+                        <!-- Daftar Soal (tetap sama) -->
                         <div class="mb-4">
                             <div class="d-flex justify-content-between align-items-center mb-3">
                                 <h5>Daftar Soal</h5>

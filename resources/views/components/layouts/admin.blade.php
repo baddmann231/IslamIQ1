@@ -138,10 +138,10 @@ body[data-bs-theme="dark"] .dropdown-menu {
 </li>
 
 <li class="nav-item">
-  <a wire:navigate class="nav-link collapsed" href="/admin/materi">
-    <i class="bi bi-journal-text"></i>
-    <span>Materi</span>
-  </a>
+    <a wire:navigate class="nav-link collapsed" href="/admin/learning-contents">
+        <i class="bi bi-journal-text"></i>
+        <span>Materi</span>
+    </a>
 </li>
 
 <li class="nav-item">

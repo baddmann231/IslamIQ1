@@ -109,7 +109,7 @@
                             </div>
                         </a>
                         
-                        <a href="{{ route('user.materi') }}" 
+                        <a href="{{ route('user.learning-contents') }}" 
                            class="btn btn-success btn-lg d-flex align-items-center justify-content-start">
                             <i class="bi bi-book me-2"></i>
                             <div class="text-start">
